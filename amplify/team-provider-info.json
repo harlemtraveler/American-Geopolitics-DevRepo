@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-americangeopoliticsd-dev-145341-authRole",
+      "UnauthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-145341-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-145341-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-americangeopoliticsd-dev-145341-deployment",
+      "UnauthRoleName": "amplify-americangeopoliticsd-dev-145341-unauthRole",
+      "StackName": "amplify-americangeopoliticsd-dev-145341",
+      "StackId": "arn:aws:cloudformation:us-east-1:012106285164:stack/amplify-americangeopoliticsd-dev-145341/1da3a070-21fc-11eb-b7df-12709ad3d671",
+      "AmplifyAppId": "daejjvry6127p"
+    }
+  }
+}
