@@ -10,6 +10,11 @@
       "StackName": "amplify-americangeopoliticsd-dev-145341",
       "StackId": "arn:aws:cloudformation:us-east-1:012106285164:stack/amplify-americangeopoliticsd-dev-145341/1da3a070-21fc-11eb-b7df-12709ad3d671",
       "AmplifyAppId": "daejjvry6127p"
+    },
+    "categories": {
+      "auth": {
+        "americangeopoliticsda5ef8dcd": {}
+      }
     }
   }
 }
