@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-americangeopoliticsd-dev-145341-authRole",
-      "UnauthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-145341-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-145341-authRole",
+      "AuthRoleName": "amplify-americangeopoliticsd-dev-163808-authRole",
+      "UnauthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-163808-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::012106285164:role/amplify-americangeopoliticsd-dev-163808-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-americangeopoliticsd-dev-145341-deployment",
-      "UnauthRoleName": "amplify-americangeopoliticsd-dev-145341-unauthRole",
-      "StackName": "amplify-americangeopoliticsd-dev-145341",
-      "StackId": "arn:aws:cloudformation:us-east-1:012106285164:stack/amplify-americangeopoliticsd-dev-145341/1da3a070-21fc-11eb-b7df-12709ad3d671",
-      "AmplifyAppId": "daejjvry6127p"
+      "DeploymentBucketName": "amplify-americangeopoliticsd-dev-163808-deployment",
+      "UnauthRoleName": "amplify-americangeopoliticsd-dev-163808-unauthRole",
+      "StackName": "amplify-americangeopoliticsd-dev-163808",
+      "StackId": "arn:aws:cloudformation:us-east-1:012106285164:stack/amplify-americangeopoliticsd-dev-163808/dce3e9e0-22d3-11eb-b4f8-12217e59f19f",
+      "AmplifyAppId": "d1x6jy4lllf32o"
     },
     "categories": {
       "auth": {
-        "americangeopoliticsda5ef8dcd": {}
+        "americangeopoliticsd2537b61f": {}
       }
     }
   }

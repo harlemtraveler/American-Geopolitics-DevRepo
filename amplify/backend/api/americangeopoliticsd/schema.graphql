@@ -1,20 +1,149 @@
+type User @model(
+    queries: { get: "getUser" }
+    mutations: { create: "registerUser", update: "updateUser" }
+    subscriptions: null
+  )
+  @key(fields: ["userId"]) {
+  userId: ID!
+  screenName: String!
+  avatar: String
+  backgroundImageUrl: String
+  bio: String
+  location: String
+  website: String
+  birthdate: String
+  email: String!
+  registered: Boolean
+  orders: [Order] @connection(name: "UserOrders", sortField: "createdAt")
+  posts: [Post] @connection(keyName: "postsByUserId", fields: ["userId"])
+  createdAt: String
+  updatedAt: String
+  following: [Following] @connection(keyName: "followingByUserId", fields: ["userId"])
+  followersCount: Int!
+  followingCount: Int!
+}
+
+type Post @model
+  @key(name: "postsByUserId", fields: ["authorId"]) {
+  id: ID!
+  authorId: ID!
+  content: String!
+  postImage: String
+  author: User @connection(fields: ["authorId"])
+  comments: [Comment] @connection(keyName: "commentsByPostId", fields: ["id"])
+  likes: [PostLike] @connection(keyName: "postLikesByPostId", fields: ["id"])
+}
+
+type Comment @model
+  @key(name: "commentsByPostId", fields: ["postId"]) {
+  id: ID!
+  postId: ID!
+  authorId: ID!
+  text: String!
+  likes: [CommentLike] @connection(keyName: "commentLikesByCommentId", fields: ["id"])
+  author: User @connection(fields: ["authorId"])
+  post: Post @connection(fields: ["postId"])
+}
+
+type PostLike @model
+  @key(name: "postLikesByPostId", fields: ["postId"])
+  @key(name: "postLikesByUser", fields: ["userId", "createdAt"], queryField: "postLikesByUser") {
+  id: ID!
+  postId: ID!
+  userId: ID!
+  user: User @connection(fields: ["userId"])
+  post: Post @connection(fields: ["postId"])
+  createdAt: String!
+}
+
+type CommentLike @model
+  @key(name: "commentLikesByCommentId", fields: ["commentId"])
+  @key(name: "commentLikesByUser", fields: ["userId", "createdAt"], queryField: "commentLikesByUser") {
+  id: ID!
+  userId: ID!
+  postId: ID!
+  commentId: ID!
+  user: User @connection(fields: ["userId"])
+  post: Post @connection(fields: ["postId"])
+  createdAt: String!
+}
+
+type Following @model
+  @key(name: "followingByUserId", fields: ["followerId"]) {
+  id: ID
+  followerId: ID!
+  followingId: ID!
+  follower: User @connection(fields: ["followerId"])
+  following: User @connection(fields: ["followingId"])
+  createdAt: String!
+}
+
+type Market @model @searchable {
+  id: ID!
+  name: String!
+  products: [Product]
+    @connection(name: "MarketProducts", sortField: "createdAt")
+  tags: [String]
+  owner: String!
+  createdAt: String
+}
+
+type Product
+  @model {
+  id: ID!
+  description: String!
+  market: Market @connection(name: "MarketProducts")
+  file: S3Object!
+  price: Float!
+  shipped: Boolean!
+  owner: String
+  createdAt: String
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type Order
+  @model(
+    queries: null
+    mutations: { create: "createOrder" }
+    subscriptions: null
+  ) {
+  id: ID!
+  product: Product @connection
+  user: User @connection(name: "UserOrders")
+  shippingAddress: ShippingAddress
+  createdAt: String
+}
+
+type ShippingAddress {
+  city: String!
+  country: String!
+  address_line1: String!
+  address_state: String!
+  address_zip: String!
+}
+
 type Blog @model {
   id: ID!
   name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+  articles: [Article] @connection(keyName: "byBlog", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type Article @model @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
   title: String!
   blogID: ID!
   blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  comments: [ArticleComment] @connection(keyName: "byArticle", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type ArticleComment @model @key(name: "byArticle", fields: ["articleID", "content"]) {
   id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
+  articleID: ID!
+  article: Article @connection(fields: ["articleID"])
   content: String!
 }

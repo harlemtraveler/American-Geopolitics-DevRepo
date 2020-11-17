@@ -1,6 +1,6 @@
 {
   "auth": {
-    "americangeopoliticsda5ef8dcd": {
+    "americangeopoliticsd2537b61f": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -16,7 +16,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authamericangeopoliticsda5ef8dcd"
+              "userPoolId": "authamericangeopoliticsd2537b61f"
             }
           },
           "additionalAuthenticationProviders": []

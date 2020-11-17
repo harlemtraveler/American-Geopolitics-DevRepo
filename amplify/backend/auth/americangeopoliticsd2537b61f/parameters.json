@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "americangeopoliticsda5ef8dcd_identitypool_a5ef8dcd",
+    "identityPoolName": "americangeopoliticsd2537b61f_identitypool_2537b61f",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "america5ef8dcd",
-    "userPoolName": "americangeopoliticsda5ef8dcd_userpool_a5ef8dcd",
+    "resourceNameTruncated": "americ2537b61f",
+    "userPoolName": "americangeopoliticsd2537b61f_userpool_2537b61f",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "america5ef8dcd_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "americ2537b61f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a5ef8dcd",
-    "resourceName": "americangeopoliticsda5ef8dcd",
+    "sharedId": "2537b61f",
+    "resourceName": "americangeopoliticsd2537b61f",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
