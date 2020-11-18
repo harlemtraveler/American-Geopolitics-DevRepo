@@ -1,6 +1,7 @@
 import './App.css';
 import clsx from "clsx";
 import React from "react";
+import {API, Auth, graphqlOperation, Hub} from "aws-amplify";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Authenticator, AmplifyTheme, withAuthenticator } from "aws-amplify-react";
 //**MaterialUI Imports**/
@@ -31,7 +32,19 @@ class App extends React.Component {
 
   componentDidMount() {
     // console.dir(AmplifyTheme);
+    this.getUserData();
   }
+
+  getUserData = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    // user ? this.setState({ user }) : this.setState({ user: null });
+    this.setState({ user: user.attributes });
+    console.log(this.state.user);
+  };
+
+  // getUserAttributes = async authUserData => {
+  //   const attributeArr = await Auth.userAttributes(authUserData);
+  // };
 
   handleDrawerOpen = () => {
     this.setState({ menuOpen: true });

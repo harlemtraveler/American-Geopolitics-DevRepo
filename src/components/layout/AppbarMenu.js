@@ -29,7 +29,10 @@ const TestAppbarMenu = (props) => {
           </IconButton>
           <Button size={"small"}>Subscribe</Button>
           <Typography
-            component={"h2"}
+            // component={"h2"}
+            component={Link}
+            to={"/"}
+            style={{ textDecoration: "none" }}
             variant={"h5"}
             color={"inherit"}
             align={"center"}

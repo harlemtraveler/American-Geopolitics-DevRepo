@@ -1394,8 +1394,13 @@ export const createBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1417,8 +1422,13 @@ export const updateBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1440,8 +1450,13 @@ export const deleteBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1459,8 +1474,18 @@ export const createArticle = /* GraphQL */ `
   ) {
     createArticle(input: $input, condition: $condition) {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1492,8 +1517,18 @@ export const updateArticle = /* GraphQL */ `
   ) {
     updateArticle(input: $input, condition: $condition) {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1525,8 +1560,18 @@ export const deleteArticle = /* GraphQL */ `
   ) {
     deleteArticle(input: $input, condition: $condition) {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1561,8 +1606,18 @@ export const createArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -1591,8 +1646,18 @@ export const updateArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -1621,8 +1686,18 @@ export const deleteArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name

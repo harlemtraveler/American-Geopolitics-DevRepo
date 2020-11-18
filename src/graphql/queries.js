@@ -718,8 +718,13 @@ export const getBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -754,8 +759,18 @@ export const getArticle = /* GraphQL */ `
   query GetArticle($id: ID!) {
     getArticle(id: $id) {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -789,8 +804,18 @@ export const listArticles = /* GraphQL */ `
     listArticles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -814,8 +839,18 @@ export const getArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -846,8 +881,13 @@ export const listArticleComments = /* GraphQL */ `
         articleID
         article {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }

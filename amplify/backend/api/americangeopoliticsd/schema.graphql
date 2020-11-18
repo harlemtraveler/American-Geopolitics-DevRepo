@@ -135,8 +135,14 @@ type Blog @model {
 
 type Article @model @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
-  title: String!
   blogID: ID!
+  title: String!
+  sub_title: String
+  preview: String
+  body: String
+  url: String
+  file: S3Object!
+  tags: [String]
   blog: Blog @connection(fields: ["blogID"])
   comments: [ArticleComment] @connection(keyName: "byArticle", fields: ["id"])
 }

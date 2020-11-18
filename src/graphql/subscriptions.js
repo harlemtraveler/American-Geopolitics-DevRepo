@@ -1158,8 +1158,13 @@ export const onCreateBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1178,8 +1183,13 @@ export const onUpdateBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1198,8 +1208,13 @@ export const onDeleteBlog = /* GraphQL */ `
       articles {
         items {
           id
-          title
           blogID
+          title
+          sub_title
+          preview
+          body
+          url
+          tags
           createdAt
           updatedAt
         }
@@ -1214,8 +1229,18 @@ export const onCreateArticle = /* GraphQL */ `
   subscription OnCreateArticle {
     onCreateArticle {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1244,8 +1269,18 @@ export const onUpdateArticle = /* GraphQL */ `
   subscription OnUpdateArticle {
     onUpdateArticle {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1274,8 +1309,18 @@ export const onDeleteArticle = /* GraphQL */ `
   subscription OnDeleteArticle {
     onDeleteArticle {
       id
-      title
       blogID
+      title
+      sub_title
+      preview
+      body
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      tags
       blog {
         id
         name
@@ -1307,8 +1352,18 @@ export const onCreateArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -1334,8 +1389,18 @@ export const onUpdateArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
@@ -1361,8 +1426,18 @@ export const onDeleteArticleComment = /* GraphQL */ `
       articleID
       article {
         id
-        title
         blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
         blog {
           id
           name
