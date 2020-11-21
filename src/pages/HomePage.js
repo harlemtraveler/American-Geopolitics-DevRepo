@@ -13,8 +13,8 @@ import article3 from "./markdown/blog-article.3.md";
 import Main from "../components/layout/Main";
 import Footer from "../components/layout/Footer";
 import Sidebar from "../components/layout/Sidebar";
-import FeaturedArticle from "../components/FeaturedArticle";
-import MainFeaturedArticle from "../components/MainFeaturedArticle";
+import FeaturedArticle from "../components/article_components/FeaturedArticle";
+import MainFeaturedArticle from "../components/article_components/MainFeaturedArticle";
 
 
 const articles = [article1, article2, article3];

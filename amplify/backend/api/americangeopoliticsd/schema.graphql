@@ -130,6 +130,7 @@ type ShippingAddress {
 type Blog @model {
   id: ID!
   name: String!
+  tags: [String]
   articles: [Article] @connection(keyName: "byBlog", fields: ["id"])
 }
 
@@ -141,7 +142,7 @@ type Article @model @key(name: "byBlog", fields: ["blogID"]) {
   preview: String
   body: String
   url: String
-  file: S3Object!
+  file: S3Object
   tags: [String]
   blog: Blog @connection(fields: ["blogID"])
   comments: [ArticleComment] @connection(keyName: "byArticle", fields: ["id"])

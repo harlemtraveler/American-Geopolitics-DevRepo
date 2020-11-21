@@ -17,17 +17,17 @@ import TestHomePage from "./test-components/TestHomePage";
 import "fontsource-merriweather";
 import "fontsource-libre-franklin";
 //**Component Imports**/
-import Article from "./components/Article";
+import Article from "./components/article_components/Article";
 import AppbarMenu from "./components/layout/AppbarMenu";
 import DrawerMenu from "./components/layout/DrawerMenu";
 
-// "#447fb7"
-// "#2f587f"
+export const UserContext = React.createContext();
 
 class App extends React.Component {
   state = {
     user: null,
-    menuOpen: false
+    menuOpen: false,
+    expanded: false
   };
 
   componentDidMount() {
@@ -59,52 +59,54 @@ class App extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Router>
-        <>
-          <ThemeProvider theme={themeFont}>
-            <CssBaseline />
+      <UserContext.Provider value={{ user }}>
+        <Router>
+          <>
+            <ThemeProvider theme={themeFont}>
+              <CssBaseline />
 
-            {/* Appbar */}
-            <AppbarMenu
-              classes={classes}
-              title={"American Geopolitics"}
-              handleDrawerOpen={this.handleDrawerOpen}
-              open={menuOpen}
-              position={"fixed"}
-              shiftClass={clsx(classes.appBar, {
-                [classes.appBarShift]: menuOpen,
-              })}
-            />
+              {/* Appbar */}
+              <AppbarMenu
+                classes={classes}
+                title={"American Geopolitics"}
+                handleDrawerOpen={this.handleDrawerOpen}
+                open={menuOpen}
+                position={"fixed"}
+                shiftClass={clsx(classes.appBar, {
+                  [classes.appBarShift]: menuOpen,
+                })}
+              />
 
-            {/* Drawer */}
-            <DrawerMenu
-              classes={classes}
-              open={menuOpen}
-              handleDrawerClose={this.handleDrawerClose}
-            />
+              {/* Drawer */}
+              <DrawerMenu
+                classes={classes}
+                open={menuOpen}
+                handleDrawerClose={this.handleDrawerClose}
+              />
 
-            {/* Page Main Body */}
-            <main
-              className={clsx(classes.content, {
-                [classes.contentShift]: menuOpen,
-              })}
-            >
-              <div className={classes.drawerHeader} />
+              {/* Page Main Body */}
+              <main
+                className={clsx(classes.content, {
+                  [classes.contentShift]: menuOpen,
+                })}
+              >
+                <div className={classes.drawerHeader} />
 
-              {/* Routes */}
-              <div className="app-container">
-                <Route exact path={"/"} component={HomePage} />
-                <Route path={"/profile"} component={() => (
-                  <ProfilePage user={user} />
-                )} />
-                <Route path={"/testhome"} component={TestHomePage} />
-                <Route path={"/blog"} component={ArticlePage} />
-              </div>
+                {/* Routes */}
+                <div className="app-container">
+                  <Route exact path={"/"} component={HomePage} />
+                  <Route path={"/profile"} component={() => (
+                    <ProfilePage user={user} />
+                  )} />
+                  <Route path={"/testhome"} component={TestHomePage} />
+                  <Route path={"/blog"} component={ArticlePage} />
+                </div>
 
-            </main>
-          </ThemeProvider>
-        </>
-      </Router>
+              </main>
+            </ThemeProvider>
+          </>
+        </Router>
+      </UserContext.Provider>
     );
   }
 }
@@ -173,6 +175,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
   },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,

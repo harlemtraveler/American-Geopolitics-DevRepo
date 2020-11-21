@@ -1,3 +1,4 @@
+import React from "react";
 import {Auth} from "aws-amplify";
 
 export const handleSignIn = async (username, password) => {

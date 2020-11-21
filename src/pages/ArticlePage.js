@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Article from "../components/Article";
+import Article from "../components/article_components/Article";
 import Container from "@material-ui/core/Container";
 import { grey } from "@material-ui/core/colors";
 import { makeStyles } from '@material-ui/core/styles';

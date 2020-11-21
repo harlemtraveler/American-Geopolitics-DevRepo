@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -17,10 +17,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Toolbar from "@material-ui/core/Toolbar";
 import Drawer from "@material-ui/core/Drawer";
 import {useTheme} from "@material-ui/core/styles";
+import Collapse from '@material-ui/core/Collapse';
+import RemoveIcon from '@material-ui/icons/Remove';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 export default function TestDrawerMenu(props) {
+  const [ expanded, setExpanded ] = useState(false);
   const { classes, open, onClose, handleDrawerClose } = props;
   const theme = useTheme();
+
+  const handleClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     <>
@@ -64,12 +73,35 @@ export default function TestDrawerMenu(props) {
               </ListItemIcon>
               <ListItemText primary={"Forecast"} />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={handleClick}>
               <ListItemIcon>
                 <ExploreIcon />
               </ListItemIcon>
               <ListItemText primary={"Explore"} />
+              {expanded ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
+            <Collapse in={expanded} timeout={"auto"} unmountOnExit>
+              <List>
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                    <RemoveIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"US"} />
+                </ListItem>
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                    <RemoveIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"World"} />
+                </ListItem>
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                    <RemoveIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"Politics"} />
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
           <Divider />
           <List>

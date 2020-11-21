@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Auth, API, graphqlOperation } from "aws-amplify";
-import IconButton from '@material-ui/core/IconButton';
-import Divider from "@material-ui/core/Divider";
-import NoteAddOutlinedIcon from '@material-ui/icons/NoteAddOutlined';
 import { getUser } from "../graphql/queries";
-import NewArticle from "../components/NewArticle";
-import MyEditor from "../components/editor/MyEditor";
-import EditorClass from "../components/editor/EditorClass";
+import NewArticle from "../components/article_components/NewArticle";
+import ArticleList from "../components/article_components/ArticleList";
+import NewBlog from "../components/blog_components/NewBlog";
+
 
 class ProfilePage extends Component {
   state = {
@@ -25,12 +21,10 @@ class ProfilePage extends Component {
 
     return (
       <>
-          <div>ProfilePage</div>
-          <Divider />
-          {/*<NewArticle />*/}
-          <h1>Draft.js Editor</h1>
-
-          <MyEditor />
+        {/*<MyEditor />*/}
+        <NewBlog />
+        <NewArticle />
+        <ArticleList />
       </>
     );
   }
