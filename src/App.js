@@ -12,6 +12,7 @@ import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/style
 import HomePage from "./pages/HomePage";
 import ArticlePage from "./pages/ArticlePage";
 import ProfilePage from "./pages/ProfilePage";
+import BlogPage from "./pages/BlogPage";
 import TestHomePage from "./test-components/TestHomePage";
 //**Font Imports**/
 import "fontsource-merriweather";
@@ -100,6 +101,15 @@ class App extends React.Component {
                   )} />
                   <Route path={"/testhome"} component={TestHomePage} />
                   <Route path={"/blog"} component={ArticlePage} />
+                  <Route
+                    path={"/blogs/:blogId"}
+                    component={({ match }) => (
+                      <BlogPage
+                        user={user}
+                        blogId={match.params.blogId}
+                      />
+                    )}
+                  />
                 </div>
 
               </main>

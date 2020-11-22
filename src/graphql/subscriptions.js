@@ -1155,6 +1155,7 @@ export const onCreateBlog = /* GraphQL */ `
     onCreateBlog {
       id
       name
+      owner
       tags
       articles {
         items {
@@ -1181,6 +1182,7 @@ export const onUpdateBlog = /* GraphQL */ `
     onUpdateBlog {
       id
       name
+      owner
       tags
       articles {
         items {
@@ -1207,6 +1209,7 @@ export const onDeleteBlog = /* GraphQL */ `
     onDeleteBlog {
       id
       name
+      owner
       tags
       articles {
         items {
@@ -1247,6 +1250,7 @@ export const onCreateArticle = /* GraphQL */ `
       blog {
         id
         name
+        owner
         tags
         articles {
           nextToken
@@ -1288,6 +1292,7 @@ export const onUpdateArticle = /* GraphQL */ `
       blog {
         id
         name
+        owner
         tags
         articles {
           nextToken
@@ -1329,6 +1334,7 @@ export const onDeleteArticle = /* GraphQL */ `
       blog {
         id
         name
+        owner
         tags
         articles {
           nextToken
@@ -1373,6 +1379,7 @@ export const onCreateArticleComment = /* GraphQL */ `
         blog {
           id
           name
+          owner
           tags
           createdAt
           updatedAt
@@ -1411,6 +1418,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
         blog {
           id
           name
+          owner
           tags
           createdAt
           updatedAt
@@ -1449,6 +1457,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
         blog {
           id
           name
+          owner
           tags
           createdAt
           updatedAt

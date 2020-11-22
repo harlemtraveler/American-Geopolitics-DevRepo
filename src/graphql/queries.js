@@ -715,6 +715,7 @@ export const getBlog = /* GraphQL */ `
     getBlog(id: $id) {
       id
       name
+      owner
       tags
       articles {
         items {
@@ -746,6 +747,7 @@ export const listBlogs = /* GraphQL */ `
       items {
         id
         name
+        owner
         tags
         articles {
           nextToken
@@ -776,6 +778,7 @@ export const getArticle = /* GraphQL */ `
       blog {
         id
         name
+        owner
         tags
         articles {
           nextToken
@@ -822,6 +825,7 @@ export const listArticles = /* GraphQL */ `
         blog {
           id
           name
+          owner
           tags
           createdAt
           updatedAt
@@ -858,6 +862,7 @@ export const getArticleComment = /* GraphQL */ `
         blog {
           id
           name
+          owner
           tags
           createdAt
           updatedAt
@@ -1030,6 +1035,81 @@ export const searchMarkets = /* GraphQL */ `
         }
         tags
         owner
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const searchBlogs = /* GraphQL */ `
+  query SearchBlogs(
+    $filter: SearchableBlogFilterInput
+    $sort: SearchableBlogSortInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchBlogs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        owner
+        tags
+        articles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const searchArticles = /* GraphQL */ `
+  query SearchArticles(
+    $filter: SearchableArticleFilterInput
+    $sort: SearchableArticleSortInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchArticles(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        blogID
+        title
+        sub_title
+        preview
+        body
+        url
+        file {
+          bucket
+          region
+          key
+        }
+        tags
+        blog {
+          id
+          name
+          owner
+          tags
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
       }

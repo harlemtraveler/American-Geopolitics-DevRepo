@@ -3,19 +3,19 @@ import { UserContext } from "../../App";
 import { API, graphqlOperation } from "aws-amplify";
 import { createBlog } from "../../graphql/mutations";
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import FormControl from "@material-ui/core/FormControl";
-import {InputLabel} from "@material-ui/core";
-import Select from '@material-ui/core/Select';
+import Grid from "@material-ui/core/Grid";
+import { InputLabel } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
 
 class NewBlog extends Component {
   state = {

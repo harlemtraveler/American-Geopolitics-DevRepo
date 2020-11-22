@@ -103,7 +103,7 @@ export default function HomePage() {
           ))}
         </Grid>
         <Grid container spacing={5} className={classes.mainGrid}>
-          <Main title={"From the firehose"} articles={articles} />
+          <Main title={"Main Content Component"} articles={articles} />
           <Sidebar
             title={sidebar.title}
             description={sidebar.description}

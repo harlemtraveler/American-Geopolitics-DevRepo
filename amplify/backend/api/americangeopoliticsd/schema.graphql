@@ -127,14 +127,15 @@ type ShippingAddress {
   address_zip: String!
 }
 
-type Blog @model {
+type Blog @model @searchable {
   id: ID!
   name: String!
+  owner: String!
   tags: [String]
   articles: [Article] @connection(keyName: "byBlog", fields: ["id"])
 }
 
-type Article @model @key(name: "byBlog", fields: ["blogID"]) {
+type Article @model @searchable @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
   blogID: ID!
   title: String!

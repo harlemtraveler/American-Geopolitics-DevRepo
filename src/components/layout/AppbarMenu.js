@@ -16,7 +16,7 @@ const TestAppbarMenu = (props) => {
 
   return (
     <>
-      <AppBar color={"transparent"} position={position} className={shiftClass}>
+      <AppBar color={"inherit"} position={position} className={shiftClass}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
