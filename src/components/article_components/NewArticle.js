@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { UserContext } from "../../App";
 import { API, graphqlOperation } from "aws-amplify";
+import { PhotoPicker } from "aws-amplify-react";
 import { createArticle } from "../../graphql/mutations";
 
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -20,16 +22,18 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import AlertSnackbar from "../../utils/Alert";
 
-class NewArticle extends Component {
-  state = {
+const initialState = {
     name: "",
     title: "",
     subtitle: "",
     body: "",
     url: "",
+    imagePreview: "",
+    image: "",
     options: [],
     selectedTags: [],
     addArticleDialog: false,
+    isUploading: false,
     tags: [
       "US",
       "World",
@@ -47,6 +51,9 @@ class NewArticle extends Component {
     ]
   };
 
+class NewArticle extends Component {
+  state = { ...initialState };
+
   handleAddArticle = async () => {
     console.log(this.state.title);
     console.log(this.state.subtitle);
@@ -54,6 +61,7 @@ class NewArticle extends Component {
     try {
       this.setState({ addMarketDialog: false });
       const input = {
+        blogID: this.props.blogId,
         title: this.state.title,
         sub_title: this.state.subtitle,
         body: this.state.body,
@@ -63,7 +71,7 @@ class NewArticle extends Component {
       const result = await API.graphql(graphqlOperation(createArticle, { input }));
       console.log(result);
       console.info(`Created article id: ${result.data.createArticle.id}`);
-      this.setState({ name: "", title: "", subtitle: "", body: "", url: "", selectedTags: [] });
+      this.setState({ ...initialState });
       setTimeout(() => window.location.reload(), 2000);
     } catch (err) {
       console.error("[!] Error adding new article", err);
@@ -76,7 +84,7 @@ class NewArticle extends Component {
 
   handleClose = () => {
     this.setState({ addArticleDialog: false });
-    this.setState({ name: "", title: "", subtitle: "", body: "", url: "", selectedTags: [] });
+    this.setState({ name: "", title: "", subtitle: "", body: "", url: "", imagePreview: "", selectedTags: [] });
   };
 
   handleChange = event => {
@@ -97,8 +105,8 @@ class NewArticle extends Component {
   };
 
   render() {
-    const { addArticleDialog, tags, selectedTags, options, name, title, subtitle, body, url } = this.state;
-    const { classes } = this.props;
+    const { addArticleDialog, tags, selectedTags, options, name, title, subtitle, body, url, imagePreview } = this.state;
+    const { classes, blogId } = this.props;
 
     return (
       <UserContext.Consumer>
@@ -195,6 +203,46 @@ class NewArticle extends Component {
                   shrink: true,
                 }}
               />
+
+              <Box>
+                {imagePreview && (
+                  <img
+                    src={imagePreview}
+                    alt={"Product Preview"}
+                    className={"image-preview"}
+                  />
+                )}
+                <PhotoPicker
+                  title={"Product Image"}
+                  preview={"hidden"}
+                  onLoad={photoUrl => this.setState({ imagePreview: photoUrl })}
+                  onPick={file => this.setState({ image: file })}
+                  theme={{
+                    formContainer: {
+                      margin: 0,
+                      padding: "0.8em"
+                    },
+                    sectionBody: {
+                      margin: 0,
+                      width: "250px"
+                    },
+                    formSection: {
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    },
+                    sectionHeader: {
+                      padding: "0.2em",
+                      color: "var(--darkAmazonOrange)"
+                    },
+                    amplifyButton: {
+                      display: "none"
+                    }
+                  }}
+                />
+              </Box>
+
               <FormControl className={classes.formControl}>
                 <InputLabel id={"category-tags"}>Tags</InputLabel>
                 <Select
@@ -232,7 +280,13 @@ class NewArticle extends Component {
             </DialogContent>
             <DialogActions>
               <Button color={"primary"} onClick={this.handleClose}>Cancel</Button>
-              <Button color={"primary"} onClick={this.handleAddArticle}>Submit</Button>
+              <Button
+                disabled={!title || !body}
+                color={"primary"}
+                onClick={this.handleAddArticle}
+              >
+                Submit
+              </Button>
             </DialogActions>
           </Dialog>
         </>}

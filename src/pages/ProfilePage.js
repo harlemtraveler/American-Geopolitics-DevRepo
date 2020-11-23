@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { getUser } from "../graphql/queries";
-import NewArticle from "../components/article_components/NewArticle";
-import ArticleList from "../components/article_components/ArticleList";
 import NewBlog from "../components/blog_components/NewBlog";
 
 
@@ -23,8 +21,6 @@ class ProfilePage extends Component {
       <>
         {/*<MyEditor />*/}
         <NewBlog />
-        <NewArticle />
-        <ArticleList />
       </>
     );
   }
