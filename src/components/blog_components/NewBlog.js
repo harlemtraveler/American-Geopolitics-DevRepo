@@ -40,14 +40,17 @@ class NewBlog extends Component {
     ]
   };
 
-  handleAddBlog = async () => {
+  handleAddBlog = async user => {
     console.log(this.state.name);
+    console.log(user);
     try {
       this.setState({ addBlogDialog: false });
       const input = {
         name: this.state.name,
+        owner: user.sub,
         tags: this.state.selectedTags
       };
+      console.log(input);
       const result = await API.graphql(graphqlOperation(createBlog, { input }));
       console.log(result);
       console.info(`Created Blog id: ${result.data.createBlog.id}`);
@@ -149,7 +152,7 @@ class NewBlog extends Component {
             </DialogContent>
             <DialogActions>
               <Button color={"primary"} onClick={this.handleClose}>Cancel</Button>
-              <Button color={"primary"} onClick={this.handleAddBlog}>Submit</Button>
+              <Button color={"primary"} onClick={() => this.handleAddBlog(user)}>Add</Button>
             </DialogActions>
           </Dialog>
         </>}

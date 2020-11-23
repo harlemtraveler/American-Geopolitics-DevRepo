@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { searchBlogs } from "../../graphql/queries";
+// import { searchBlogs } from "../../graphql/queries";
 // MaterialUI Imports
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
@@ -15,6 +15,48 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 // Component Imports
 import BlogList from "../blog_components/BlogList";
 // import {Input} from "element-react";
+
+const searchBlogs = /* GraphQL */ `
+  query SearchBlogs(
+    $filter: SearchableBlogFilterInput
+    $sort: SearchableBlogSortInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchBlogs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        owner
+        tags
+        articles {
+          items {
+            id
+            blogID
+            title
+            sub_title
+            preview
+            body
+            url
+            tags
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
 
 class Main extends Component {
   state = {
@@ -72,7 +114,7 @@ class Main extends Component {
         <Divider />
 
         <FormControl fullWidth>
-          <TextField
+          <Input
             id="blog-search"
             label="Search Blogs"
             name={"searchTerm"}

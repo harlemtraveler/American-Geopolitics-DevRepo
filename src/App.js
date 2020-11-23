@@ -3,6 +3,7 @@ import clsx from "clsx";
 import React from "react";
 import {API, Auth, graphqlOperation, Hub} from "aws-amplify";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
 import { Authenticator, AmplifyTheme, withAuthenticator } from "aws-amplify-react";
 //**MaterialUI Imports**/
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,6 +23,7 @@ import Article from "./components/article_components/Article";
 import AppbarMenu from "./components/layout/AppbarMenu";
 import DrawerMenu from "./components/layout/DrawerMenu";
 
+export const history = createBrowserHistory();
 export const UserContext = React.createContext();
 
 class App extends React.Component {
@@ -61,7 +63,7 @@ class App extends React.Component {
 
     return (
       <UserContext.Provider value={{ user }}>
-        <Router>
+        <Router history={history}>
           <>
             <ThemeProvider theme={themeFont}>
               <CssBaseline />
@@ -99,17 +101,13 @@ class App extends React.Component {
                   <Route path={"/profile"} component={() => (
                     <ProfilePage user={user} />
                   )} />
-                  <Route path={"/testhome"} component={TestHomePage} />
-                  <Route path={"/blog"} component={ArticlePage} />
                   <Route
                     path={"/blogs/:blogId"}
                     component={({ match }) => (
-                      <BlogPage
-                        user={user}
-                        blogId={match.params.blogId}
-                      />
+                      <BlogPage user={user} blogId={match.params.blogId} />
                     )}
                   />
+                  {/*<Route path={"/testhome"} component={TestHomePage} />*/}
                 </div>
 
               </main>

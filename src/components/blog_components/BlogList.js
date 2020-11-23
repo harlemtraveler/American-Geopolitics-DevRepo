@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import Card from '@material-ui/core/Card';
+import CheckIcon from '@material-ui/icons/Check';
 import Chip from '@material-ui/core/Chip';
 import DescriptionIcon from '@material-ui/icons/Description';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import { Loading, Icon, Tag } from "element-react";
+import { Loading } from "element-react";
 import Error from "../Error";
 
 const listBlogs = /* GraphQL */ `
@@ -20,6 +21,7 @@ const listBlogs = /* GraphQL */ `
       items {
         id
         name
+        owner
         tags
         articles {
           items {
@@ -37,22 +39,30 @@ const listBlogs = /* GraphQL */ `
   }
 `;
 
-const BlogList = () => {
+const BlogList = ({ searchResults }) => {
   return (
     <Connect query={graphqlOperation(listBlogs)}>
       {/* The below values are interpolated from the above "Connect" API query */}
       {/* "errors" - is returned as an array */}
       {({ data, loading, errors }) => {
         if (errors.length > 0) return <Error errors={errors} />;
-        if (loading || !data.listBlogs) return <Loading fullscreen={true} />
+        if (loading || !data.listBlogs) return <Loading fullscreen={true} />;
+        const blogs = searchResults.length > 0 ? searchResults : data.listBlogs.items;
 
         return (
           <>
-            <h2 className={"header"}>
-              <LibraryBooksIcon />
-              Blogs
-            </h2>
-            {data.listBlogs.items.map(blog => (
+            {searchResults.length > 0 ? (
+              <h2 className={"text-green"}>
+                <CheckIcon />
+                {searchResults.length} Results
+              </h2>
+            ) : (
+              <h2 className={"header"}>
+                <LibraryBooksIcon/>
+                Blogs
+              </h2>
+            )}
+            {blogs.map(blog => (
               <div key={blog.id} className={"my-2"}>
                 <Card
                   style={{
@@ -64,7 +74,7 @@ const BlogList = () => {
                 >
                   <div>
                     <span className={"flex"}>
-                      <Link className={"link"} to={`/blog/${blog.id}`}>
+                      <Link className={"link"} to={`/blogs/${blog.id}`}>
                         {blog.name}
                       </Link>
                       <span style={{ color: "#6b38fb" }}>
@@ -72,9 +82,9 @@ const BlogList = () => {
                       </span>
                       <DescriptionIcon style={{ color: "#6b38fb" }} />
                     </span>
-                    {/*<div style={{ color: "#344955" }}>*/}
-                    {/*  {blog.owner}*/}
-                    {/*</div>*/}
+                    <div style={{ color: "#344955" }}>
+                      {blog.owner}
+                    </div>
                   </div>
                   <div>
                     {blog.tags && blog.tags.map(tag => (
