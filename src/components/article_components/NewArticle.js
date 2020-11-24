@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { UserContext } from "../../App";
-import { API, graphqlOperation } from "aws-amplify";
+import { Storage, Auth, API, graphqlOperation } from "aws-amplify";
 import { PhotoPicker } from "aws-amplify-react";
 import { createArticle } from "../../graphql/mutations";
 
@@ -21,6 +21,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import AlertSnackbar from "../../utils/Alert";
+import aws_exports from "../../aws-exports";
 
 const initialState = {
     name: "",
@@ -59,14 +60,33 @@ class NewArticle extends Component {
     console.log(this.state.subtitle);
     console.log(this.state.body);
     try {
-      this.setState({ addMarketDialog: false });
+      this.setState({ isUploading: true });
+      const visibility = "public";
+      const { identityId } = await Auth.currentCredentials();
+      const { username } = await Auth.currentUserInfo();
+      const filename = `/${visibility}/${identityId}/${Date.now()}-${this.state.image.name}`;
+      const uploadedFile = await Storage.put(filename, this.state.image.file, {
+        contentType: this.state.image.type,
+        progressCallback: progress => {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+          const percentUploaded = Math.round((progress.loaded / progress.total) * 100);
+          this.setState({ percentUploaded });
+        }
+      });
+      const file = {
+        key: uploadedFile.key,
+        bucket: aws_exports.aws_user_files_s3_bucket,
+        region: aws_exports.aws_user_files_s3_bucket_region
+      };
       const input = {
         blogID: this.props.blogId,
+        owner: username,
         title: this.state.title,
         sub_title: this.state.subtitle,
         body: this.state.body,
         url: this.state.url,
-        tags: this.state.selectedTags
+        tags: this.state.selectedTags,
+        file
       };
       const result = await API.graphql(graphqlOperation(createArticle, { input }));
       console.log(result);
@@ -78,7 +98,7 @@ class NewArticle extends Component {
     }
   };
 
-  handleClickOpen = () => {
+  handleClickOpen = async () => {
     this.setState({ addArticleDialog: true });
   };
 
@@ -105,7 +125,7 @@ class NewArticle extends Component {
   };
 
   render() {
-    const { addArticleDialog, tags, selectedTags, options, name, title, subtitle, body, url, imagePreview } = this.state;
+    const { addArticleDialog, tags, selectedTags, title, subtitle, body, url, imagePreview, isUploading } = this.state;
     const { classes, blogId } = this.props;
 
     return (
@@ -281,11 +301,11 @@ class NewArticle extends Component {
             <DialogActions>
               <Button color={"primary"} onClick={this.handleClose}>Cancel</Button>
               <Button
-                disabled={!title || !body}
+                disabled={!title || !body || isUploading}
                 color={"primary"}
                 onClick={this.handleAddArticle}
               >
-                Submit
+                {isUploading ? "Uploading..." : "Add Article"}
               </Button>
             </DialogActions>
           </Dialog>

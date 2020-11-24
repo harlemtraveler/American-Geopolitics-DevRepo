@@ -23,5 +23,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "s3cb894ebb": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

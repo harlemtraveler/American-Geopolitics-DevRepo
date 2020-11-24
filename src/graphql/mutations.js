@@ -1397,6 +1397,7 @@ export const createBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1427,6 +1428,7 @@ export const updateBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1457,6 +1459,7 @@ export const deleteBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1481,6 +1484,7 @@ export const createArticle = /* GraphQL */ `
     createArticle(input: $input, condition: $condition) {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1526,6 +1530,7 @@ export const updateArticle = /* GraphQL */ `
     updateArticle(input: $input, condition: $condition) {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1571,6 +1576,7 @@ export const deleteArticle = /* GraphQL */ `
     deleteArticle(input: $input, condition: $condition) {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1619,6 +1625,7 @@ export const createArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -1661,6 +1668,7 @@ export const updateArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -1703,6 +1711,7 @@ export const deleteArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview

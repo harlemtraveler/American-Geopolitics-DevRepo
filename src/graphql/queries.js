@@ -721,6 +721,7 @@ export const getBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -764,6 +765,7 @@ export const getArticle = /* GraphQL */ `
     getArticle(id: $id) {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -811,6 +813,7 @@ export const listArticles = /* GraphQL */ `
       items {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -848,6 +851,7 @@ export const getArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -892,6 +896,7 @@ export const listArticleComments = /* GraphQL */ `
         article {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1088,6 +1093,7 @@ export const searchArticles = /* GraphQL */ `
       items {
         id
         blogID
+        owner
         title
         sub_title
         preview

@@ -1161,6 +1161,7 @@ export const onCreateBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1188,6 +1189,7 @@ export const onUpdateBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1215,6 +1217,7 @@ export const onDeleteBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
@@ -1236,6 +1239,7 @@ export const onCreateArticle = /* GraphQL */ `
     onCreateArticle {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1278,6 +1282,7 @@ export const onUpdateArticle = /* GraphQL */ `
     onUpdateArticle {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1320,6 +1325,7 @@ export const onDeleteArticle = /* GraphQL */ `
     onDeleteArticle {
       id
       blogID
+      owner
       title
       sub_title
       preview
@@ -1365,6 +1371,7 @@ export const onCreateArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -1404,6 +1411,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview
@@ -1443,6 +1451,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
       article {
         id
         blogID
+        owner
         title
         sub_title
         preview

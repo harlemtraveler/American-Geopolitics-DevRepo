@@ -138,6 +138,7 @@ type Blog @model @searchable {
 type Article @model @searchable @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
   blogID: ID!
+  owner: String
   title: String!
   sub_title: String
   preview: String
