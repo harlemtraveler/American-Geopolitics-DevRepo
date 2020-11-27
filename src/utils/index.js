@@ -13,6 +13,20 @@ export const formatProductDate = date => format(date, "MMM do, yyyy");
 
 export const formatOrderDate = date => format(date, "EEEE h:mm aaaa MMM do yyyy");
 
+
+/********************
+ * Handle Change   *
+ ********************/
+export const handleChange = event => {
+  event.preventDefault();
+  const targetName = event.target.name;
+  const targetValue = event.target.value;
+  this.setState({
+    ...targetName,
+    [targetName]: targetValue
+  });
+};
+
 /********************
  * Handle Sign In   *
  ********************/

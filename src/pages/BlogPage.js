@@ -28,11 +28,15 @@ const getBlog = /* GraphQL */ `
         items {
           id
           blogID
+          owner
           title
           sub_title
           preview
           body
           url
+          file {
+            key
+          }
           tags
           createdAt
           updatedAt

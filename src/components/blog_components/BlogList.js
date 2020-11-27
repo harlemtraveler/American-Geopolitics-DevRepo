@@ -26,6 +26,7 @@ const listBlogs = /* GraphQL */ `
         articles {
           items {
             id
+            owner
             title
             url
           }
@@ -88,7 +89,7 @@ const BlogList = ({ searchResults }) => {
                   </div>
                   <div>
                     {blog.tags && blog.tags.map(tag => (
-                      <Chip icon={LocalOfferIcon} label={tag} />
+                      <Chip icon={LocalOfferIcon} label={tag} style={{ margin: "2px" }} />
                     ))}
                   </div>
                 </Card>
